@@ -1,0 +1,14 @@
+﻿@model Answers
+@{
+    ViewData["Title"] = "DeleteAnswerForm";
+}
+
+<h1>Confirm Delete Answer</h1><div/>
+
+<h3>Answer: @Model.detail</h3><div/>
+
+<h3>Are you sure you want to delete this answer?</h3><div/>
+
+<div><a href="/questions/deleteanswer/@Model.id" class="btn btn-primary">Confirm Delete</a></div>
+
+<div><a href="~/questions/index" class="btn btn-danger">Cancel</a></div>

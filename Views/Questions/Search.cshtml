@@ -1,0 +1,84 @@
+﻿@model List<Questions>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search Results</h1>
+
+<a href="/questions/index" class="btn btn-primary">Home</a>
+
+@if(Model.Count == 0)
+{
+    <div>Sorry, no results were returned. Please hit the "Home" button</div>
+}
+else
+{
+<table>
+    <tbody>
+        <tr>
+            <td>
+                Date Posted
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Username
+            </td>
+            <td>
+                Title of Question
+            </td>
+            <td>
+                Details
+            </td>
+            <td>
+                Category
+            </td>
+            <td>
+                Manage
+            </td>
+        </tr>
+        @foreach (Questions q in Model)
+        {
+            <tr>
+                <td>
+                    @q.posted
+                </td>
+                <td>
+                    @if (@q.status == 1)
+                    {
+                        <div>Answered</div>
+                    }
+                    else
+                    {
+                        <div>Unanswered</div>
+                    }
+                </td>
+                <td>
+                    @q.username
+                </td>
+                <td>
+                    <a href="/questions/viewquestion/@q.id">@q.title</a>
+                </td>
+                <td>
+                    @q.detail
+                </td>
+                <td>
+                    @q.category
+                </td>
+                <td>
+                    @if (q.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                    {
+                        <a href="/questions/editform/@q.id" class="btn btn-primary">Edit</a>
+                    }
+
+                    @if (q.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                    {
+                        <a href="/questions/deleteform/@q.id" class="btn btn-danger">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

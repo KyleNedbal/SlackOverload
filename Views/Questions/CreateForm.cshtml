@@ -1,0 +1,15 @@
+﻿@model string
+@{
+    ViewData["Title"] = "CreateForm";
+}
+
+<h1>Ask a New Question</h1>
+<form method="post" action="/questions/create">
+    Title <input type="text" name="title" /><br />
+    Detail <input type="text" name="detail" /><br />
+    Category <input type="text" name="category" /><br />
+    <input type="hidden" name="username" value="@Model" /><br />
+    <input type="hidden" name="status" value="0" />
+    <input type="hidden" value="@DateTime.Now" name="posted" />
+    <input type="submit" value="Add" />
+</form>

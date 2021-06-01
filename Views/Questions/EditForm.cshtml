@@ -1,0 +1,28 @@
+﻿@model Questions
+@{
+    ViewData["Title"] = "EditForm";
+}
+
+<h1>Edit Question</h1>
+
+<form method="post" action="/questions/edit">
+    <input type="hidden" value="@Model.id" name="id" />
+    <input type="hidden" value="@Model.username" name="username" />
+    Username <label> @Model.username</label><br />
+    Title <input type="text" value="@Model.title" name="title" /><br />
+    Detail <input type="text" value="@Model.detail" name="detail" /><br />
+    <input type="hidden" value="@Model.posted" name="posted" />
+    <label> @Model.posted</label><br />
+    Category <input type="text" value="@Model.category" name="category" /><br />
+    <input type="hidden" value="@Model.status" name="status" />
+    @if (Model.status == 0)
+    {
+        <label>Unanswered</label><br />
+    }
+    else if (Model.status == 1)
+    {
+        <label>Answered</label><br />
+    }
+    <input type="submit" value="Save" />
+</form>
+

@@ -1,0 +1,55 @@
+﻿@model Questions
+@{
+    ViewData["Title"] = "CreateAnswerForm";
+}
+
+<h1>Answer Form</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                Date Posted
+            </td>
+            <td>
+                Username
+            </td>
+            <td>
+                Title of Question
+            </td>
+            <td>
+                Details
+            </td>
+            <td>
+                Category
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Model.posted
+            </td>
+            <td>
+                @Model.username
+            </td>
+            <td>
+                @Model.title
+            </td>
+            <td>
+                @Model.detail
+            </td>
+            <td>
+                @Model.category
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<form method="post" action="/questions/createanswer/">
+    <input type="text" name="detail"/>
+    <input type="hidden" name="username" value="@DAL.CurrentUser" />
+    <input type="hidden" name="questionid" value="@Model.id" />
+    <input type="hidden" name="posted" value="@DateTime.Now" />
+    <input type="submit" value="Add" class="btn btn-primary"/>
+
+</form>

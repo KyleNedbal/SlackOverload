@@ -1,0 +1,106 @@
+﻿@model Questions
+@{
+    ViewData["Title"] = "ViewQuestion";
+}
+
+<h1>View Question</h1>
+
+<a href="/questions/createanswerform/@Model.id" class="btn btn-primary">Add an Answer</a>
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                Date Posted
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Username
+            </td>
+            <td>
+                Title of Question
+            </td>
+            <td>
+                Details
+            </td>
+            <td>
+                Category
+            </td>
+            @if (Model.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+            {
+                <td>
+                    Manage
+                </td>
+            }
+        </tr>
+
+        <tr>
+            <td>
+                @Model.posted
+            </td>
+            <td>
+                @if (Model.status == 1)
+                {
+                    <div>Answered</div>
+                }
+                else
+                {
+                    <div>Unanswered</div>
+                }
+            </td>
+            <td>
+                @Model.username
+            </td>
+            <td>
+                @Model.title
+            </td>
+            <td>
+                @Model.detail
+            </td>
+            <td>
+                @Model.category
+            </td>
+            <td>
+                @if (Model.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                {
+                    <a href="/questions/editform/@Model.id" class="btn btn-primary">Edit</a>
+                }
+
+                @if (Model.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                {
+                    <a href="/questions/deleteform/@Model.id" class="btn btn-danger">Delete</a>
+                }
+            </td>
+        </tr>
+        @foreach (Answers answer in ViewBag.answers)
+        {
+            if (answer.questionid == Model.id)
+            {
+                <tr>
+                    <td>
+                        @answer.posted
+                    </td>
+                    <td>
+                        @answer.username
+                    </td>
+                    <td>
+                        @answer.detail
+                    </td>
+                    <td>
+                        @if (answer.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                        {
+                            <a href="/questions/editanswerform/@answer.id" class="btn btn-primary">Edit</a>
+                        }
+
+                        @if (answer.username == DAL.CurrentUser || DAL.CurrentUser == "admin")
+                        {
+                            <a href="/questions/deleteanswerform/@answer.id" class="btn btn-danger">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
